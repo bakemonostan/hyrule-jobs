@@ -1,7 +1,10 @@
 <template>
   <div class="app">
+    <button @click="handleClick('title')">Order by Title</button>
+    <button @click="handleClick('salary')">Order by Salary</button>
+    <button @click="handleClick('location')">Order by Location</button>
     <!-- Bind jobs as a prop to joblist component -->
-    <JobList :jobs="jobs" />
+    <JobList :jobs="jobs" :order="order" />
   </div>
 </template>
 
@@ -9,6 +12,7 @@
 import { defineComponent, ref } from 'vue';
 import JobList from '@/components/JobList.vue';
 import Job from './types/Jobs';
+import OrderTerm from '@/types/OrderTerm';
 
 export default defineComponent({
   name: 'App',
@@ -42,7 +46,14 @@ export default defineComponent({
         id: '5',
       },
     ]);
-    return { jobs };
+
+    const order = ref<OrderTerm>('title');
+
+    const handleClick = (term: OrderTerm) => {
+      order.value = term;
+    };
+
+    return { jobs, handleClick, order };
   },
 });
 </script>
