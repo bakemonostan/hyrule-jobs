@@ -1,15 +1,20 @@
 <template>
-  <div class="app"><h3> Hello typescript vue </h3> </div>
+  <div class="app">
+    <!-- Bind jobs as a prop to joblist component -->
+    <JobList :jobs="jobs" />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import JobList from '@/components/JobList.vue';
 import Job from './types/Jobs';
 
 export default defineComponent({
   name: 'App',
-  components: {},
+  components: { JobList },
   setup() {
+    // this is an array of objects, gotten from the Jobs interface
     const jobs = ref<Job[]>([
       {
         title: 'farm worker',
@@ -43,7 +48,32 @@ export default defineComponent({
 </script>
 
 <style>
-#app {
+header {
+  text-align: center;
+}
+header .order {
+  margin-top: 20px;
+}
+button {
+  margin: 0 10px;
+  color: #1195c9;
+  border: 3px solid #1195c9;
+  background: #d5f0ff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+header .title {
+  display: flex;
+  justify-content: center;
+}
+header img {
+  width: 60px;
+  margin-right: 20px;
+}
+header h1 {
+  font-size: 3em;
 }
 </style>
 
